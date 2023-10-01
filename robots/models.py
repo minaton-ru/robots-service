@@ -6,3 +6,11 @@ class Robot(models.Model):
     model = models.CharField(max_length=2, blank=False, null=False)
     version = models.CharField(max_length=2, blank=False, null=False)
     created = models.DateTimeField(blank=False, null=False)
+
+    class Meta:
+        ordering = ['-created']
+        verbose_name = 'Робот'
+        verbose_name_plural = 'Роботы'
+
+    def __str__(self):
+        return f'{self.serial} ({self.pk})'
