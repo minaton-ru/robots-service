@@ -53,6 +53,7 @@ local_settings.py
 db.sqlite3
 media/
 static/
+buffer
 
 # pyenv
 .python-version
