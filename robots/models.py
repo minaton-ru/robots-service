@@ -12,5 +12,5 @@ class Robot(models.Model):
         verbose_name = 'Робот'
         verbose_name_plural = 'Роботы'
 
-    def __str__(self):
+    def __str__(self) -> str:
         return f'{self.serial} ({self.pk})'
