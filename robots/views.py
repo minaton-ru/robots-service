@@ -17,7 +17,7 @@ from .utilities import create_xlsx_from_queryset
 @method_decorator(csrf_exempt, name="dispatch")
 class RobotCreateView(CreateView):
     """
-    API endpoint принимает POST-запрос, клиент должен быть авторизован.
+    API endpoint принимает POST-запрос.
     При успешной валидации данных создает новую запись в базе данных
     и возвращает 201 CREATED.
     При ошибке в полученных данных возвращает 400 Bad Request.
