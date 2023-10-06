@@ -1,7 +1,5 @@
 import json
-import io
 from datetime import timedelta
-from openpyxl import Workbook
 
 from django.utils import timezone
 from django.db.models import Count
@@ -13,12 +11,13 @@ from django.core.exceptions import ValidationError, RequestAborted
 from django.core.exceptions import EmptyResultSet
 
 from .models import Robot
+from .utilities import create_xlsx_from_queryset
 
 
 @method_decorator(csrf_exempt, name="dispatch")
 class RobotCreateView(CreateView):
     """
-    API endpoint принимает POST-запрос, клиент должен быть авторизован.
+    API endpoint принимает POST-запрос.
     При успешной валидации данных создает новую запись в базе данных
     и возвращает 201 CREATED.
     При ошибке в полученных данных возвращает 400 Bad Request.
@@ -82,34 +81,9 @@ class LastWeekExportView(ListView):
         if not queryset:
             raise EmptyResultSet("No new robots")
 
-        # Создаем множество уникальных моделей роботов,
-        # произведенных за последнюю неделю
-        modelset = set([robot['model'] for robot in queryset])
-
-        # Создаем пустой файл, удаляем пустой лист.
-        workbook = Workbook()
-        workbook.remove(workbook.active)
-
-        # В файле генерируем отдельные листы для каждой модели,
-        # добавляем первой строкой заголовки для таблицы.
-        for sheet in modelset:
-            ws = workbook.create_sheet(sheet)
-            ws.append(['Модель', 'Версия', 'Количество за неделю'])
-
-        # Для каждого робота в кверисете добавляем его статистику на лист,
-        # соответствующий названию модели.
-        for robot in queryset:
-            for model in modelset:
-                if robot['model'] == model:
-                    row = [robot['model'], robot['version'], robot['counting']]
-                    ws = workbook[model]
-                    ws.append(row)
-
-        # Если ошибок нет, сохраняем файл в буфер и возвращаем.
+        # Передаем кверисет на обработку, получаем файл.
         try:
-            buffer = io.BytesIO()
-            workbook.save(buffer)
-            buffer.seek(0)
+            buffer = create_xlsx_from_queryset(queryset)
             filename = f'week-report-{timezone.now().strftime("%Y-%m-%d")}.xlsx'  # noqa: E501
             return FileResponse(buffer, as_attachment=True, filename=filename)
         except RequestAborted:

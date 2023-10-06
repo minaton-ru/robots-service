@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+
+{% block title %}Создать заказ - {{ block.super }} {% endblock %}
+
+{% block content %}
+<h2>Заказ на робота создан успешно</h2>
+<p>Вы получите уведомление на указанный email, когда робот нужной вам модели будет в наличии.</p>
+<p><a href="{% url 'order_add' %}">Создать еще один заказ</a></p>
+{% endblock %}

@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+
+{% block title %}Создать заказ - {{ block.super }} {% endblock %}
+
+{% block content %}
+<h2>Создать заказ на робота</h2>
+<form action="" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.as_div }}
+    <input type="submit" value="Отправить">
+</form>
+
+{% endblock %}
