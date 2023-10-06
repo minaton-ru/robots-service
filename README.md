@@ -40,8 +40,7 @@ Content-Type: application/json
 Если валидация данных из запроса прошла успешно, то ендпойнт вернет ответ 201 CREATED:
 ```
 HTTP 201 CREATED
-Allow: GET, HEAD, OPTIONS
-text/html; charset=utf-8
+Content-Type: text/html; charset=utf-8
 Date:
 Server: 
 Content-Length:    
@@ -68,7 +67,7 @@ Content-Length:
 
 ### Новый заказ  
 
-Создать новый заказ на робота по адресу `/order/add/`.
+Создать новый заказ на робота по URL `/order/add/`.
 
 ### Отправка email  
 
