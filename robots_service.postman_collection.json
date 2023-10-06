@@ -1,0 +1,77 @@
+{
+	"info": {
+		"_postman_id": "392b077b-04ec-4dc5-9d59-6312efe258c6",
+		"name": "robots_service",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "18547121"
+	},
+	"item": [
+		{
+			"name": "create robot 1",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"model\":\"R3\",\"version\":\"D2\",\"created\":\"2023-09-30 20:59:59\"}"
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/robots/create/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"robots",
+						"create",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "create robot 2",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"model\":\"R2\",\"version\":\"D2\",\"created\":\"2023-09-25 20:59:59\"}"
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "create robot GET",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:8000/robots/create/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"robots",
+						"create",
+						""
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
